@@ -12,7 +12,7 @@ A functional version of the game will include:
 
 ## Wireframes
 
-![JSP-Wireframe](JSP - Wireframe.jpg)
+![jsp_wireframe](./docs/jsp_wireframe.jpg)
 
 ## Technologies and Structure
 This game will be created with the subsequent technologies:
