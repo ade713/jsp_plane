@@ -1,4 +1,4 @@
-# JavaScript Project
+# United AirForce
 
 ## Background
 The JavaScript project will be a lite variation of vertical scrolling arcade games. This version will include a jet/plane (user controlled object), and randomly obstacles throughout for the user to avoid and destroy. As the game progresses, obstacle evasion will gradually become more difficult by increasing the speed at which the scrolling occurs. Scoring is based upon the length of time the user is able to avoid the obstacles and also obstacles destroyed.
