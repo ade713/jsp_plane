@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/ade713/jsp_plane/issues"
   },
-  "homepage": "https://github.com/ade713/jsp_plane#readme"
+  "homepage": "https://github.com/ade713/jsp_plane#readme",
+  "dependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1"
+  }
 }
