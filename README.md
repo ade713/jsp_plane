@@ -21,10 +21,14 @@ This game will be created with the subsequent technologies:
 + `Webpack` - bundling and loading files within the program.
 
 File structure will be based on the following:
-+ `game.js`: scoring, game start, pause, end check.
-+ `field.js`: main game play area, handle movement logic.
-+ `plane.js`: logic for jet/plane.
-+ `obstacle.js`: logic for generating obstacles.
++ `game.js`: game start, pause, end check
+  + scoring, and time/game clock logic here
++ `field.js`: main game play area
+  + handle rendering of game objects, e.g. plane and obstacles
++ `plane.js`: logic for jet/plane
+  + input logic for plane movement, plane dimensions, sprites
++ `obstacle.js`: logic for generating obstacles
+  + obstacle dimensions, descent speed, sprites
 
 ## Implementation Schedule
 **Day1:** Setup the foundation for development, including an entry file, webpack bundle, package installation. Learn `Easel.js` basics to at least render an object.
