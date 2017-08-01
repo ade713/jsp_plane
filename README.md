@@ -12,7 +12,7 @@ A functional version of the game will include:
 
 ## Wireframes
 
-![JSP-Wireframe](/Users/adefarquhar/app_academy/jsp/JSP - Wireframe.jpg)
+![JSP-Wireframe](JSP - Wireframe.jpg)
 
 ## Technologies and Structure
 This game will be created with the subsequent technologies:
