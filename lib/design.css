@@ -1,0 +1,30 @@
+/*@font-face {
+  font-family: '1stSortie';
+  src:
+    local('1st Sortie'),
+    local('1st-Sortie'),
+    url('../assets/1st_sortie.ttf')
+    format('truetype');
+}*/
+
+
+body {
+  background: black;
+}
+
+h1 {
+  color: white;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 30px;
+  text-align: center;
+}
+
+canvas {
+  background-image: url('../assets/background_2.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+  margin: 0 auto;
+  height: 100%inherit;
+}
