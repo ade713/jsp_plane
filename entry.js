@@ -1,41 +1,22 @@
 import Game from './lib/game';
 import Plane from './lib/plane';
+import Projectile from './lib/projectile';
 
 document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('gameCanvas');
   const ctx = canvas.getContext('2d');
 
   let game = new Game(ctx);
-  let p = new Plane(ctx);
-  let leftPressed;
-  let rightPressed;
+  let plane = new Plane(ctx);
+  let proj = new Projectile(ctx);
 
-  let stage;
-
+  let keyPress;
   window.addEventListener("keydown", event => {
-    return keyDownHandler(event);
+    keyPress = event.keyCode;
   });
   window.addEventListener("keyup", event => {
-      return keyUpHandler(event);
+    keyPress = false;
   });
-
-  function keyDownHandler(e) {
-    console.log(e);
-    if (e.keyCode === 39) {
-      rightPressed = true;
-      p.move(-5);
-    } else if (e.KeyCode === 37) {
-      leftPressed = true;
-    }
-  }
-
-  function keyUpHandler(e) {
-    if (e.keyCode === 39) {
-      rightPressed = false;
-    } else if (e.keyCode === 37) {
-      leftPressed = false;
-    }
-  }
 
   const animate = () => {
     display();
@@ -50,7 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function display() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    p.planeImg();
+    let dx = 5;
+    let speed = -15;
+
+    if (keyPress === 39) {
+      plane.move(dx);
+    } else if (keyPress === 37) {
+      plane.move(-dx);
+    } else if (keyPress === 32) {
+      proj.shoot(speed);
+    }
+    plane.planeImg();
+    proj.projectileImg();
 
     drawScore();
   }
