@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let game = new Game(ctx);
   let plane = new Plane(ctx);
-  let proj = new Projectile(ctx, plane.coords.fieldX);
+  let proj = new Projectile(ctx);
   let paused;
 
   let keyPress;
@@ -40,12 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
       plane.move(-dx);
     } else if (keyPress === 32) {
       proj.projectileImg();
-      proj.shoot(speed);
+      proj.shoot(speed, plane.coords.fieldX);
     }
 
     plane.planeImg();
 
-    console.log(game.score());
     drawScore(game.score());
   }
 
