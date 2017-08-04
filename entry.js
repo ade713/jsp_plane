@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let paused;
   let keyPress;
-  let lives = 4;
+  let lives = 1;
   let playSound;
 
   const gameMusic = new Audio('./assets/guile_theme.mp3');
@@ -46,6 +46,15 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillText(`Lives: ${livesLeft}`, 500, 30);
   }
 
+  function gameOver() {
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+    ctx.fillRect(0, 200, canvas.width, 400);
+    ctx.fillStyle = '#F00';
+    ctx.font = '60px Arial';
+    ctx.fillText("GAME OVER", 125, 400);
+    ctx.fillText(`SCORE: ${Date.now - Game.timeStart}`, 125, 500);
+  }
+
   function collisionDetection() {
     for (let i = 0; i < obst.blocks.length; i++) {
       if (
@@ -56,6 +65,9 @@ document.addEventListener('DOMContentLoaded', () => {
         )
       ) {
         lives--;
+        // if (!lives) {
+        //
+        // };
         obst.blocks[i].cnvY = -80;
       }
     }
@@ -78,30 +90,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // render screen objects
   function display() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let dx = 5;
-    let speed = -5;
+    if (lives > 0) {
+      let dx = 5;
+      if (keyPress === 39) {
+        plane.move(dx);
+      } else if (keyPress === 37) {
+        plane.move(-dx);
+      }
 
-    if (keyPress === 39) {
-      plane.move(dx);
-    } else if (keyPress === 37) {
-      plane.move(-dx);
-    } else if (keyPress === 32) {
-      proj.projectileImg();
-      proj.shoot(speed, plane.coords.fieldX);
+      obst.createBlocks();
+      obst.drawBlock();
+      obst.brickFallIndex();
+      obst.fall();
+      obst.resetBrick();
+      collisionDetection();
+      plane.planeImg();
+
+      drawScore(game.score());
+      drawLives(lives);
+    } else {
+      gameOver();
     }
-
-    obst.createBlocks();
-    obst.drawBlock();
-    obst.brickFallIndex();
-    obst.fall();
-    obst.resetBrick();
-    collisionDetection();
-
-    plane.planeImg();
-
-
-    drawScore(game.score());
-    drawLives(lives);
   }
 
   const animate = () => {
@@ -123,22 +132,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let mute = false;
   function toggleSound() {
-    // if (mute) {
-    //
-    // }
-    // return mute;
+    playSound = !playSound;
 
-    // playSound = !playSound;
-    //
-    // // gameMusic.muted = true;
-    // if (playSound) {
-    //   console.log('SOUND', playSound);
-    //   gameMusic.play().loop;
-    // }
+   // gameMusic.muted = true;
+    if (playSound) {
+      console.log('SOUND', playSound);
+      gameMusic.play().loop;
+    }
   }
-
-// restart game???
-// window location reload function
 
 // Start button
   const startButton = document.getElementById("startButton");
