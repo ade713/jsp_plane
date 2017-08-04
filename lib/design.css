@@ -19,3 +19,14 @@ canvas {
   margin: 0 auto;
   height: 100%inherit;
 }
+
+div.game-main {
+  display: flex;
+  flex-direction: row;
+}
+
+.side-bar {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}

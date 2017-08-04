@@ -1,5 +1,6 @@
 import Game from './lib/game';
 import Plane from './lib/plane';
+import Obstacle from './lib/obstacle';
 import Projectile from './lib/projectile';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let game = new Game(ctx);
   let plane = new Plane(ctx);
   let proj = new Projectile(ctx);
+  let obst = new Obstacle(ctx);
   let paused;
 
   let keyPress;
@@ -29,6 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillText(`Score: ${score}`, 10, 30);
   }
 
+  obst.createBlocks();
+  // obst.blocks.forEach (block, idx) {
+  //
+  // };
+  // obst.drawBlock();
+
+
   function display() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let dx = 5;
@@ -43,9 +52,21 @@ document.addEventListener('DOMContentLoaded', () => {
       proj.shoot(speed, plane.coords.fieldX);
     }
 
+    obst.drawBlock();
+    // obst.fall();
+
+    // obst.blocks.forEach((block, idx) => {
+    //   console.log(block);
+    //   obst.drawBlock(block);
+    //   obst.fall();
+    // });
+
+    // obst.drawBlock(obst.blocks[3]);
+
     plane.planeImg();
 
     drawScore(game.score());
+
   }
 
   const animate = () => {
@@ -69,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('click', () => {
     togglePause();
   });
+
 
   animate();
 });
