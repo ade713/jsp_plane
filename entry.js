@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let paused;
   let keyPress;
-  let lives;
+  let lives = 2;
 
 
   window.addEventListener("keydown", event => {
@@ -33,8 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = '#fff';
     ctx.fillText(`Score: ${score}`, 10, 30);
   }
-
-  lives = 2;
 
   function drawLives(livesLeft) {
     console.log('LIVE');
@@ -96,10 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
     display();
   };
 
+// Start button
+  const startButton = document.getElementById("startButton");
+  startButton.addEventListener('click', () => {
+    togglePause();
+  });
 // Pause functiononality
-  // paused = false;
-  let pauseButton;
-  pauseButton = document.getElementById("pauseButton");
+  const pauseButton = document.getElementById("pauseButton");
   pauseButton.addEventListener('click', () => {
     togglePause();
   });
