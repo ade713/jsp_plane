@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillRect(0, 200, canvas.width, 400);
     ctx.fillStyle = '#F00';
     ctx.font = '60px Arial';
-    ctx.fillText("GAME OVER", 125, 400);
-    ctx.fillText(`SCORE: ${Date.now - Game.timeStart}`, 125, 500);
+    ctx.fillText("GAME OVER", 125, 375);
+    ctx.fillText(`SCORE: ${game.score()}`, 150, 475);
   }
 
   function collisionDetection() {
@@ -65,9 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         )
       ) {
         lives--;
-        // if (!lives) {
-        //
-        // };
         obst.blocks[i].cnvY = -80;
       }
     }
@@ -110,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
       drawLives(lives);
     } else {
       gameOver();
+      paused = true;
     }
   }
 
