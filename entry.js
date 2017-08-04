@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let paused;
   let keyPress;
-  let lives = 2;
+  let lives = 4;
   let playSound;
 
   const gameMusic = new Audio('./assets/guile_theme.mp3');
@@ -43,27 +43,28 @@ document.addEventListener('DOMContentLoaded', () => {
   function drawLives(livesLeft) {
     ctx.font = '20px Arial';
     ctx.fillStyle = '#fff';
-    ctx.fillText(`Lives: ${livesLeft}`, 520, 30);
+    ctx.fillText(`Lives: ${livesLeft}`, 500, 30);
   }
 
   function collisionDetection() {
     for (let i = 0; i < obst.blocks.length; i++) {
-      // obst.blocks[i]
-      if ((plane.coords.cnvX < obst.blocks[i].cnvX + //obst.blocks[i].cnvW &&
-          plane.coords.cnvX + plane.coords.planeW > obst.blocks[i].cnvX) &&
-          (plane.coords.cnvY < obst.blocks[i].cnvY + obst.blocks[i].obstH &&
-           plane.coords.cnvY + plane.coords.planeH > obst.blocks[i].cnvY)) {
+      if (
+        ((plane.coords.cnvX > obst.blocks[i].cnvX && plane.coords.cnvX < obst.blocks[i].cnvX+obst.blocks[i].obstW) ||
+          (plane.coords.cnvX+plane.coords.planeW > obst.blocks[i].cnvX && plane.coords.cnvX+plane.coords.planeW < obst.blocks[i].cnvX+obst.blocks[i].obstW)) &&
+        ((plane.coords.cnvY > obst.blocks[i].cnvY && plane.coords.cnvY < obst.blocks[i].cnvY+obst.blocks[i].obstH) ||
+        (plane.coords.cnvY+plane.coords.planeH > obst.blocks[i].cnvY && plane.coords.cnvY+plane.coords.planeH < obst.blocks[i].cnvY+obst.blocks[i].obstH)
+        )
+      ) {
         lives--;
-        plane.cnvX = 275;
-        plane.cnvY = 740;
+        obst.resetBrick();
       }
     }
   }
 
-  // window.onload welcome page
   paused = true;
   playSound = true;
 
+  // window.onload welcome page
   window.onload = () => {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -75,8 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // render screen objects
-  // obst.createBlocks();
-
   function display() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let dx = 5;
@@ -91,7 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
       proj.shoot(speed, plane.coords.fieldX);
     }
 
-    // console.log('Display BLOCKS', obst.blocks);
     obst.createBlocks();
     obst.drawBlock();
     obst.brickFallIndex();
