@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let paused;
   let keyPress;
-  let lives = 1;
+  let lives;
   let playSound;
 
   const gameMusic = new Audio('./assets/guile_theme.mp3');
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   paused = true;
   playSound = true;
-
+  lives = 4;
   // window.onload welcome page
   window.onload = () => {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
@@ -143,6 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const startButton = document.getElementById("startButton");
   startButton.addEventListener('click', () => {
     togglePause();
+    paused = false;
+    game = new Game(ctx);
+    plane = new Plane(ctx);
+    proj = new Projectile(ctx);
+    obst = new Obstacle(ctx);
+    lives = 4;
   });
 
 // Pause functiononality
