@@ -32,10 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   obst.createBlocks();
-  // obst.blocks.forEach (block, idx) {
-  //
-  // };
-  // obst.drawBlock();
+
+  let bricks = [];
+  for (let i = 0; i < 4; i++) {
+    bricks[i] = new Obstacle(ctx);
+  }
+
 
 
   function display() {
@@ -52,21 +54,19 @@ document.addEventListener('DOMContentLoaded', () => {
       proj.shoot(speed, plane.coords.fieldX);
     }
 
-    obst.drawBlock();
-    // obst.fall();
+    bricks.forEach((brick, i) => {
+      brick.drawBlock();
+      brick.fall(Math.floor(Math.random()*(4)) + 1);
+    });
 
-    // obst.blocks.forEach((block, idx) => {
-    //   console.log(block);
-    //   obst.drawBlock(block);
-    //   obst.fall();
-    // });
-
-    // obst.drawBlock(obst.blocks[3]);
+    // obst.drawBlock();
+    // if () {
+    //  call fall
+    // }
 
     plane.planeImg();
 
     drawScore(game.score());
-
   }
 
   const animate = () => {
@@ -77,17 +77,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+// Pause functiononality
   paused = false;
+  let pauseButton;
+  pauseButton = document.getElementById("pauseButton");
 
   function togglePause() {
     paused = !paused;
     if (!paused) {
       animate();
     }
-    document.getElementById("pauseButton").value = paused ? "unpause" : "pause";
+    // pauseButton = document.getElementById("pauseButton").value = paused ? "unpause" : "pause";
   }
 
-  document.addEventListener('click', () => {
+  pauseButton.addEventListener('click', () => {
     togglePause();
   });
 
