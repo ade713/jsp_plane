@@ -11,9 +11,12 @@ document.addEventListener('DOMContentLoaded', () => {
   let plane = new Plane(ctx);
   let proj = new Projectile(ctx);
   let obst = new Obstacle(ctx);
-  let paused;
 
+  let paused;
   let keyPress;
+  let lives;
+
+
   window.addEventListener("keydown", event => {
     keyPress = event.keyCode;
   });
@@ -31,6 +34,15 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillText(`Score: ${score}`, 10, 30);
   }
 
+  lives = 2;
+
+  function drawLives(livesLeft) {
+    console.log('LIVE');
+    ctx.font = '20px Arial';
+    ctx.fillStyle = '#fff';
+    ctx.fillText(`Lives: ${livesLeft}`, 520, 30);
+  }
+
   obst.createBlocks();
 
   let bricks = [];
@@ -38,8 +50,19 @@ document.addEventListener('DOMContentLoaded', () => {
     bricks[i] = new Obstacle(ctx);
   }
 
+  // window.onload welcome page
+  paused = true;
+  window.onload = () => {
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#00F';
+    ctx.font = '40px Arial';
+    ctx.fillText("WELCOME", 200, 250);
+    ctx.fillText("TO", 275, 350);
+    ctx.fillText("UNITED AIRFORCE", 125, 450);
+  };
 
-
+  // render screen objects
   function display() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let dx = 5;
@@ -59,41 +82,34 @@ document.addEventListener('DOMContentLoaded', () => {
       brick.fall(Math.floor(Math.random()*(4)) + 1);
     });
 
-    // obst.drawBlock();
-    // if () {
-    //  call fall
-    // }
-
     plane.planeImg();
 
     drawScore(game.score());
+    drawLives(lives);
   }
 
   const animate = () => {
-    display();
-
     if (!paused) {
       requestAnimationFrame(animate);
     }
+
+    display();
   };
 
 // Pause functiononality
-  paused = false;
+  // paused = false;
   let pauseButton;
   pauseButton = document.getElementById("pauseButton");
+  pauseButton.addEventListener('click', () => {
+    togglePause();
+  });
 
   function togglePause() {
     paused = !paused;
     if (!paused) {
       animate();
     }
-    // pauseButton = document.getElementById("pauseButton").value = paused ? "unpause" : "pause";
   }
-
-  pauseButton.addEventListener('click', () => {
-    togglePause();
-  });
-
 
   animate();
 });
