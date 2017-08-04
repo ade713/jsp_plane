@@ -94,16 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // console.log('Display BLOCKS', obst.blocks);
     obst.createBlocks();
     obst.drawBlock();
-    //call obst.fall
     obst.brickFallIndex();
     obst.fall();
-    //invoke obst.handleFall
-    //obst.resetBrick
     obst.resetBrick();
+    collisionDetection();
 
     plane.planeImg();
 
-    collisionDetection();
 
     drawScore(game.score());
     drawLives(lives);
@@ -117,19 +114,29 @@ document.addEventListener('DOMContentLoaded', () => {
     display();
   };
 
+// background music
+  // playSound = true;
+  gameMusic.play().loop;
+  gameMusic.muted = toggleSound();
   const soundButton = document.getElementById("soundButton");
   soundButton.addEventListener('click', () => {
     toggleSound();
   });
 
+  let mute = false;
   function toggleSound() {
-    playSound = !playSound;
-    // gameMusic.play();
+    // if (mute) {
+    //
+    // }
+    // return mute;
 
-    gameMusic.muted = true;
-    if (playSound) {
-      gameMusic.play();
-    }
+    // playSound = !playSound;
+    //
+    // // gameMusic.muted = true;
+    // if (playSound) {
+    //   console.log('SOUND', playSound);
+    //   gameMusic.play().loop;
+    // }
   }
 
 // restart game???
