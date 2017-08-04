@@ -15,10 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
   let paused;
   let keyPress;
   let lives = 2;
+  let playSound;
 
+  const gameMusic = new Audio('./assets/guile_theme.mp3');
+  const planeSFX = new Audio('./assets/jet_sfx.wav');
 
   window.addEventListener("keydown", event => {
     keyPress = event.keyCode;
+    if (keyPress === 37 || keyPress === 39) {
+      planeSFX.play();
+    }
   });
   window.addEventListener("keyup", event => {
     if (keyPress === 32) {
@@ -43,10 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function collisionDetection() {
     for (let i = 0; i < obst.blocks.length; i++) {
       // obst.blocks[i]
-      if ((plane.coords.cnvX < obst.blocks[i].cnvX+150 &&
-          plane.coords.cnvX > obst.blocks[i].cnvX) &&
-          (plane.coords.cnvY < obst.blocks[i].cnvY+60 &&
-           plane.coords.cnvY > obst.blocks[i].cnvY)) {
+      if ((plane.coords.cnvX < obst.blocks[i].cnvX + //obst.blocks[i].cnvW &&
+          plane.coords.cnvX + plane.coords.planeW > obst.blocks[i].cnvX) &&
+          (plane.coords.cnvY < obst.blocks[i].cnvY + obst.blocks[i].obstH &&
+           plane.coords.cnvY + plane.coords.planeH > obst.blocks[i].cnvY)) {
         lives--;
         plane.cnvX = 275;
         plane.cnvY = 740;
@@ -56,10 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // window.onload welcome page
   paused = true;
+  playSound = true;
+
   window.onload = () => {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = '#00F';
+    ctx.fillStyle = '#000';
     ctx.font = '40px Arial';
     ctx.fillText("WELCOME", 200, 250);
     ctx.fillText("TO", 275, 350);
@@ -108,6 +116,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     display();
   };
+
+  const soundButton = document.getElementById("soundButton");
+  soundButton.addEventListener('click', () => {
+    toggleSound();
+  });
+
+  function toggleSound() {
+    playSound = !playSound;
+    // gameMusic.play();
+
+    gameMusic.muted = true;
+    if (playSound) {
+      gameMusic.play();
+    }
+  }
 
 // restart game???
 // window location reload function
