@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         )
       ) {
         lives--;
-        obst.resetBrick();
+        obst.blocks[i].cnvY = -80;
       }
     }
   }
