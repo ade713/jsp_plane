@@ -35,17 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function drawLives(livesLeft) {
-    console.log('LIVE');
     ctx.font = '20px Arial';
     ctx.fillStyle = '#fff';
     ctx.fillText(`Lives: ${livesLeft}`, 520, 30);
   }
 
-  obst.createBlocks();
-
-  let bricks = [];
-  for (let i = 0; i < 4; i++) {
-    bricks[i] = new Obstacle(ctx);
+  function collisionDetection() {
+    for (let i = 0; i < obst.blocks.length; i++) {
+      // obst.blocks[i]
+      if ((plane.coords.cnvX < obst.blocks[i].cnvX+150 &&
+          plane.coords.cnvX > obst.blocks[i].cnvX) &&
+          (plane.coords.cnvY < obst.blocks[i].cnvY+60 &&
+           plane.coords.cnvY > obst.blocks[i].cnvY)) {
+        lives--;
+        plane.cnvX = 275;
+        plane.cnvY = 740;
+      }
+    }
   }
 
   // window.onload welcome page
@@ -61,6 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // render screen objects
+  // obst.createBlocks();
+
   function display() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     let dx = 5;
@@ -75,12 +83,19 @@ document.addEventListener('DOMContentLoaded', () => {
       proj.shoot(speed, plane.coords.fieldX);
     }
 
-    bricks.forEach((brick, i) => {
-      brick.drawBlock();
-      brick.fall(Math.floor(Math.random()*(4)) + 1);
-    });
+    // console.log('Display BLOCKS', obst.blocks);
+    obst.createBlocks();
+    obst.drawBlock();
+    //call obst.fall
+    obst.brickFallIndex();
+    obst.fall();
+    //invoke obst.handleFall
+    //obst.resetBrick
+    obst.resetBrick();
 
     plane.planeImg();
+
+    collisionDetection();
 
     drawScore(game.score());
     drawLives(lives);
@@ -94,11 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
     display();
   };
 
+// restart game???
+// window location reload function
+
 // Start button
   const startButton = document.getElementById("startButton");
   startButton.addEventListener('click', () => {
     togglePause();
   });
+
 // Pause functiononality
   const pauseButton = document.getElementById("pauseButton");
   pauseButton.addEventListener('click', () => {
