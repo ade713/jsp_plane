@@ -14,6 +14,8 @@ Unitd AirForce is a lite variation of "vertical" scrolling arcade games. This ve
 + Press `Right Arrow`: To move right.
 + Avoid blocks to score points. Last as long as you can!
 
+## Technology
+
 ## Future Plans
 + Add jet ability to shoot projectiles and destroy bricks.
 + Add options for increasing number of bricks.
