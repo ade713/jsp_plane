@@ -166,7 +166,7 @@ class Obstacle {
 
   handleFall() {
     if (this.blocks.length === 10) {
-      let brickIndex = Math.round(3*Math.random());
+      let brickIndex = Math.round(9*Math.random());
       this.blocks[brickIndex].falling = true;
     }
   }
@@ -188,7 +188,6 @@ class Obstacle {
   }
 
   fall(dy = Math.floor(4 * Math.random() + 4)) {
-    console.log('fallSPD', dy);
     for (let i = 0; i < this.blocks.length; i++) {
       if (this.blocks[i].falling) {
         this.blocks[i].cnvY += dy;
