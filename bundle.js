@@ -187,7 +187,9 @@ class Obstacle {
     }
   }
 
-  fall(dy = Math.floor(4 * Math.random() + 4)) {
+  fall(dy = Math.floor(4 * Math.random() + 4), baseDy) {
+    dy = Math.floor(4 * Math.random() + baseDy);
+
     for (let i = 0; i < this.blocks.length; i++) {
       if (this.blocks[i].falling) {
         this.blocks[i].cnvY += dy;
