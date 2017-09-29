@@ -134,7 +134,7 @@ class Obstacle {
       clipH: 50,
       cnvX: 0,
       cnvY: -80,
-      obstW: 150,
+      obstW: 60,
       obstH: 60,
       falling: false
     };
@@ -145,7 +145,7 @@ class Obstacle {
       let newCoords = Object.assign({}, this.coords);
       this.blocks.push(newCoords);
     }
-    this.coords.cnvX += 150;
+    this.coords.cnvX += 60;
   }
 
   drawBlock() {
@@ -165,7 +165,7 @@ class Obstacle {
   }
 
   handleFall() {
-    if (this.blocks.length === 4) {
+    if (this.blocks.length === 10) {
       let brickIndex = Math.round(3*Math.random());
       this.blocks[brickIndex].falling = true;
     }
@@ -187,7 +187,8 @@ class Obstacle {
     }
   }
 
-  fall(dy = 4) {
+  fall(dy = Math.floor(4 * Math.random() + 4)) {
+    console.log('fallSPD', dy);
     for (let i = 0; i < this.blocks.length; i++) {
       if (this.blocks[i].falling) {
         this.blocks[i].cnvY += dy;
