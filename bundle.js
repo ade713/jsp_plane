@@ -188,9 +188,7 @@ class Obstacle {
   }
 
   fall(score) {
-    let baseSpeed; // = 4;
-
-    console.log('SCR', score);
+    let baseSpeed;
 
     if (score > 60) {
       baseSpeed = 12;
@@ -207,8 +205,6 @@ class Obstacle {
     }
     
     let dy = Math.floor(3 * Math.random() + baseSpeed);
-    console.log('bSPD', baseSpeed);
-    console.log('dY', dy);
 
     for (let i = 0; i < this.blocks.length; i++) {
       if (this.blocks[i].falling) {
