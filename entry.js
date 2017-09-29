@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
       obst.createBlocks();
       obst.drawBlock();
       obst.brickFallIndex();
-      obst.fall();
+      obst.fall(game.score());
       obst.resetBrick();
       collisionDetection();
       plane.planeImg();
