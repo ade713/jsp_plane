@@ -302,8 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   paused = true;
-  // playSound = true;
   lives = 2;
+
   // window.onload welcome page
   window.onload = () => {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
@@ -355,11 +355,15 @@ document.addEventListener('DOMContentLoaded', () => {
   gameMusic.play().loop;
   const soundButton = document.getElementById("soundButton");
   soundButton.addEventListener('click', () => {
-    toggleSound();
+    if (playSound) {
+      toggleSound(false);
+    } else {
+      toggleSound(true);
+    }
   });
 
-  function toggleSound() {
-    playSound = !playSound;
+  function toggleSound(sound = true) {
+    playSound = sound;
 
     if (playSound) {
       gameMusic.muted = false;
@@ -372,7 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-// Start button
+// New Game button
   const startButton = document.getElementById("startButton");
   startButton.addEventListener('click', () => {
     togglePause();
@@ -381,7 +385,7 @@ document.addEventListener('DOMContentLoaded', () => {
     plane = new __WEBPACK_IMPORTED_MODULE_1__lib_plane__["a" /* default */](ctx);
     proj = new __WEBPACK_IMPORTED_MODULE_3__lib_projectile__["a" /* default */](ctx);
     obst = new __WEBPACK_IMPORTED_MODULE_2__lib_obstacle__["a" /* default */](ctx);
-    lives = 4;
+    lives = 2;
   });
 
 // Pause functiononality
@@ -392,7 +396,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function togglePause() {
     paused = !paused;
+    // if (paused) {
+    //   toggleSound(false);
+    // }
     if (!paused) {
+      // toggleSound(true);
       animate();
     }
   }

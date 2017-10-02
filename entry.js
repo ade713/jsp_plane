@@ -73,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   paused = true;
-  // playSound = true;
   lives = 2;
+
   // window.onload welcome page
   window.onload = () => {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
@@ -126,11 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
   gameMusic.play().loop;
   const soundButton = document.getElementById("soundButton");
   soundButton.addEventListener('click', () => {
-    toggleSound();
+    if (playSound) {
+      toggleSound(false);
+    } else {
+      toggleSound(true);
+    }
   });
 
-  function toggleSound() {
-    playSound = !playSound;
+  function toggleSound(sound = true) {
+    playSound = sound;
 
     if (playSound) {
       gameMusic.muted = false;
@@ -143,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-// Start button
+// New Game button
   const startButton = document.getElementById("startButton");
   startButton.addEventListener('click', () => {
     togglePause();
@@ -152,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     plane = new Plane(ctx);
     proj = new Projectile(ctx);
     obst = new Obstacle(ctx);
-    lives = 4;
+    lives = 2;
   });
 
 // Pause functiononality
@@ -163,7 +167,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function togglePause() {
     paused = !paused;
+    // if (paused) {
+    //   toggleSound(false);
+    // }
     if (!paused) {
+      // toggleSound(true);
       animate();
     }
   }
