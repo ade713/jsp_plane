@@ -248,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const gameMusic = new Audio('./assets/guile_theme.mp3');
   const planeSFX = new Audio('./assets/jet_sfx.wav');
+  const collisionSFX = new Audio('./assets/explode.wav');
 
   window.addEventListener("keydown", event => {
     keyPress = event.keyCode;
@@ -293,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         (plane.coords.cnvY+plane.coords.planeH > obst.blocks[i].cnvY && plane.coords.cnvY+plane.coords.planeH < obst.blocks[i].cnvY+obst.blocks[i].obstH)
         )
       ) {
+        collisionSFX.play();
         lives--;
         obst.blocks[i].cnvY = -80;
       }
@@ -350,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // background music
   // playSound = true;
-  gameMusic.play().loop;
+  // gameMusic.play().loop;
   gameMusic.muted = toggleSound();
   const soundButton = document.getElementById("soundButton");
   soundButton.addEventListener('click', () => {
