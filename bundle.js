@@ -352,33 +352,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // background music
   playSound = true;
-  // gameMusic.play().loop;
-  // gameMusic.muted = toggleSound();
+  gameMusic.play().loop;
   const soundButton = document.getElementById("soundButton");
   soundButton.addEventListener('click', () => {
     toggleSound();
   });
 
-  // let mute = false;
   function toggleSound() {
-    console.log('before', playSound);
     playSound = !playSound;
-    console.log('after', playSound);
 
-   // gameMusic.muted = true;
-    // if (playSound) {
-    //   console.log('SOUND', playSound);
-    //   // gameMusic.play().loop;
-    //   gameMusic.muted = false;
-    //   planeSFX.muted = false;
-    //   collisionSFX = false;
-    // }
-
-    if (playSound === false) {
-      console.log('SOUND', playSound);
+    if (playSound) {
+      gameMusic.muted = false;
+      planeSFX.muted = false;
+      collisionSFX.muted = false;
+    } else {
       gameMusic.muted = true;
       planeSFX.muted = true;
-      collisionSFX = true;
+      collisionSFX.muted = true;
     }
   }
 
