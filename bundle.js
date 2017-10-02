@@ -302,8 +302,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   paused = true;
-  playSound = true;
-  lives = 4;
+  // playSound = true;
+  lives = 2;
   // window.onload welcome page
   window.onload = () => {
     ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
@@ -351,22 +351,34 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
 // background music
-  // playSound = true;
+  playSound = true;
   // gameMusic.play().loop;
-  gameMusic.muted = toggleSound();
+  // gameMusic.muted = toggleSound();
   const soundButton = document.getElementById("soundButton");
   soundButton.addEventListener('click', () => {
     toggleSound();
   });
 
-  let mute = false;
+  // let mute = false;
   function toggleSound() {
+    console.log('before', playSound);
     playSound = !playSound;
+    console.log('after', playSound);
 
    // gameMusic.muted = true;
-    if (playSound) {
+    // if (playSound) {
+    //   console.log('SOUND', playSound);
+    //   // gameMusic.play().loop;
+    //   gameMusic.muted = false;
+    //   planeSFX.muted = false;
+    //   collisionSFX = false;
+    // }
+
+    if (playSound === false) {
       console.log('SOUND', playSound);
-      gameMusic.play().loop;
+      gameMusic.muted = true;
+      planeSFX.muted = true;
+      collisionSFX = true;
     }
   }
 
