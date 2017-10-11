@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function gameOver() {
+    // const finalScore = Math.floor(((Date.now() - game.timeStart) / 1000));
+
     ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
     ctx.fillRect(0, 200, canvas.width, 400);
     ctx.fillStyle = '#F00';
@@ -73,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   paused = true;
-  lives = 2;
+  // lives = 2;
 
   // window.onload welcome page
   window.onload = () => {
